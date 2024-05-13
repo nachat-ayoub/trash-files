@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
       $("#go-watch").html(
-        `<a class='btn btn-purple mx-auto' href='#watch-container'>شاهد ${decodeURIComponent(data.title)}</a>`
+        `<a class='btn btn-purple mx-auto' href='#watch-container'>شاهد ${decodeURIComponent(data.title).replace('الحلقة' ,'شاهد الحلقة')}</a>`
       );
       // Get the element with ID 'watch-container'
       const watchContainer = $("<div id='watch-container'></div>");
