@@ -1,5 +1,3 @@
-console.log("Blogger Embed Script!!");
-
 /**
  * Decodes an obfuscated string back to a JSON object.
  * @param {string} obfuscatedString - The obfuscated string to be decoded.
@@ -27,7 +25,6 @@ function decodeJSON(obfuscatedString) {
   }
   const jsonObject = JSON.parse(decoded);
 
-  console.log(jsonObject);
   return jsonObject;
 }
 
@@ -44,10 +41,8 @@ window.onload = function () {
   // Check if the 'v' query parameter exists
   const videoParam = getQueryParam("v");
   if (videoParam) {
-    console.log({ videoParam });
-
     const data = decodeJSON(videoParam);
-    console.log({ data });
+    
     if (data && data?.s && data?.p && data?.b && data?.n) {
       // Get the element with ID 'watch-container'
       const watchContainer = document.getElementById("watch-container");
