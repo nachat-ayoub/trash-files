@@ -54,7 +54,7 @@ $(document).ready(function () {
     if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
       $("#go-watch").html(
         `<a class='btn btn-purple mx-auto' href='#watch-container'> شاهد 
-        ${data.title}
+        ${decodeURIComponent(data.title)}
         </a>`
       );
       // Get the element with ID 'watch-container'
