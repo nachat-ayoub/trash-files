@@ -1,3 +1,5 @@
+console.log("Blogger Embed Script!!");
+
 /**
  * Decodes an obfuscated string back to a JSON object.
  * @param {string} obfuscatedString - The obfuscated string to be decoded.
