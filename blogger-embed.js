@@ -1,6 +1,3 @@
-window.onload = function() {
-
-    
 /**
  * Decodes an obfuscated string back to a JSON object.
  * @param {string} obfuscatedString - The obfuscated string to be decoded.
@@ -19,7 +16,7 @@ function decodeJSON(obfuscatedString) {
     '{"': "$",
     "{'": "$",
     '"}': "!",
-    "'}": "!"
+    "'}": "!",
   };
 
   for (const key in mapping) {
@@ -28,40 +25,67 @@ function decodeJSON(obfuscatedString) {
   }
   const jsonObject = JSON.parse(decoded);
 
-  console.log(jsonObject)
+  console.log(jsonObject);
   return jsonObject;
 }
-  
-    
-  // Function to parse URL query parameters
-  function getQueryParam(name) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(name);
-  }
 
-  // Check if the &quot;v&quot; query parameter exists
-  const videoParam = getQueryParam(&quot;v&quot;);
+// Function to parse URL query parameters
+function getQueryParam(name) {
+  const url = window.location.search;
+  const regex = /v=([^&=?]*)/;
+  const match = url.match(regex);
+
+  return match ? match[1] : null;
+}
+
+window.onload = function () {
+  // Check if the 'v' query parameter exists
+  const videoParam = getQueryParam("v");
   if (videoParam) {
-    
+    console.log({ videoParam });
 
-	const data = decodeJSON(videoParam)
-    console.log({data})
-    if(data &amp;&amp; data?.w &amp;&amp; data?.p &amp;&amp; data?.b &amp;&amp; data?.n) {
+    const data = decodeJSON(videoParam);
+    console.log({ data });
+    if (data && data?.s && data?.p && data?.b && data?.n) {
+      // Get the element with ID 'watch-container'
+      const watchContainer = document.getElementById("watch-container");
+      // If the element exists, set its innerHTML to the specified iframe code
+      if (watchContainer) {
+        watchContainer.id = "watchContainer";
+        watchContainer.innerHTML = `
+      <ul class='servers list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1'>
+    ${data.s
+      .split("|")
+      .map((s) => s.replace("-", " ").split("_"))
+      .map(
+        (s, index) =>
+          `<li><button onclick="(() => { $('#watch').attr('src', '${
+            s[1]
+          }'); $('.btn-secondary').toggleClass('btn-secondary btn-outline-secondary'); $(this).toggleClass('btn-outline-secondary btn-secondary') })()"
+       class="btn btn-sm btn-${
+         index === 0 ? "" : "outline-"
+       }secondary m-1 text-capitalize">${s[0]}</button></li>`
+      )
+      .join("")}
+  </ul>
 
-    // Get the element with ID &quot;watch-container&quot;
-    const watchContainer = document.getElementById(&quot;watch-container&quot;);
-    // If the element exists, set its innerHTML to the specified iframe code
-    if (watchContainer) {
-      watchContainer.innerHTML = `
-        <iframe class='w-100' src='${data.w}' style='aspect-ratio:16/9;'/>
+  <iframe id='watch' class='w-100' style='aspect-ratio:16/9; background-color: rgba(57, 62, 71,0.35);' src='${
+    data.s.split("|")[0].split("_")[1]
+  }' allowfullscreen></iframe>
+  
+      <div class='d-flex align-items-center justify-content-between mt-1 mb-3'>
+        <a class='btn btn-sm btn-purple pe-3' href='${data.p}'>
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
+          الحلقة السابقة
+      </a>
 
-        <div class='d-flex justify-content-between mt-3'>
-          <a class='btn btn-primary' href='${data.p}'>Prev</a>
-          <a class='btn btn-secondary' href='${data.b}'>Back</a>
-          <a class='btn btn-success' href='${data.n}'>Next</a>
-        </div>
-    `;
-    }
+        <a class='btn mx-1 btn-primary' href='${data.b}'>العودة</a>
+
+        <a class='btn btn-sm btn-purple ps-3' href='${data.n}'>الحلقة التالية
+          <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
+        </a>
+      </div>`;
+      }
     }
   }
 };
