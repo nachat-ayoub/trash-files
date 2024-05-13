@@ -51,9 +51,11 @@ $(document).ready(function () {
   if (urlPattern.test(currentURL) && videoParam) {
     const data = decodeJSON(videoParam);
 
-    if (data && data?.s && data?.p && data?.b && data?.n) {
+    if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
       $("#go-watch").html(
-        `<a class='btn btn-purple mx-auto' href='#watch-container'>شاهد الحلقة</a>`
+        `<a class='btn btn-purple mx-auto' href='#watch-container'> شاهد 
+        ${data.title}
+        </a>`
       );
       // Get the element with ID 'watch-container'
       const watchContainer = $("<div id='watch-container'></div>");
