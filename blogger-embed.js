@@ -96,8 +96,7 @@ $(document).ready(function () {
             </a>
           </div>
           
-          <div class='btn btn-purple mx-auto mt-1'>${decodeURIComponent(data.title) }</div>
-          `);
+          <div class='btn btn-purple mx-auto mt-1 d-table'>${decodeURIComponent(data.title) }</div>`);
     }
   }
 });
