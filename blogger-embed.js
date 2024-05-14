@@ -49,7 +49,7 @@ $(document).ready(function () {
 
   // Check if the current URL matches the pattern
   if (urlPattern.test(currentURL) && videoParam) {
-    const data = decodeJSON(videoParam);
+    const data = decodeJSON(decodeURIComponent(videoParam));
 
     if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
 
