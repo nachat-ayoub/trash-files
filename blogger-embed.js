@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
 
-      $('head').append(`
+      $('head').append($(`
       <style>
         .responsive-fs {
             /* Default font size for all devices */
@@ -65,8 +65,7 @@ $(document).ready(function () {
               font-size: 0.85rem !important;  /* Adjust font size for mobile */
             }
           }
-      </style>
-      `)
+      </style>`))
       
       $("#go-watch").html(
         `<a class='btn btn-purple mx-auto' style='opacity:.7;' href='#'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" style="scale:1.6;"><circle cx="18" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="12" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".33" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="6" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin="0" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg></a>`
