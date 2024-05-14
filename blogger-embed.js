@@ -1,8 +1,15 @@
-/**
- * Decodes an obfuscated string back to a JSON object.
- * @param {string} obfuscatedString - The obfuscated string to be decoded.
- * @returns {object} The JSON object.
- */
+function checkDateDiff(dateParamStr, minutes) {
+  const dateParam = new Date(dateParamStr);
+  
+  // Convert minutes to milliseconds
+  const millisecondsDiff = minutes * 60 * 1000;
+
+  // Calculate the difference between the current date and the dateParam
+  const timeDifference = new Date() - dateParam;
+  // Check if the time difference is greater than the specified minutes
+  return timeDifference > millisecondsDiff;
+}
+
 function decodeJSON(obfuscatedString) {
   // 1. Base64 decode and parse JSON
   let decoded = atob(obfuscatedString);
@@ -37,6 +44,10 @@ function getQueryParam(name) {
   return match ? match[1] : null;
 }
 
+
+
+
+// After page load
 $(document).ready(function () {
   // Check if the 'v' query parameter exists
   const videoParam = getQueryParam("v");
@@ -50,7 +61,8 @@ $(document).ready(function () {
   // Check if the current URL matches the pattern
   if (urlPattern.test(currentURL) && videoParam) {
     const data = decodeJSON(decodeURIComponent(videoParam));
-
+    console.log(data)
+    
     if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
 
       // Create a style element
