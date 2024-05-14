@@ -58,7 +58,6 @@ $(document).ready(function () {
      
       // Add the CSS rule to the style element
       mobileStyles.textContent = `
-      <style>
         .responsive-fs {
             /* Default font size for all devices */
             font-size: 1rem !important;
@@ -68,8 +67,7 @@ $(document).ready(function () {
             .responsive-fs {
               font-size: 0.85rem !important;  /* Adjust font size for mobile */
             }
-          }
-      </style>`;
+          }`;
       $('head').append(mobileStyles)
       
       $("#go-watch").html(
