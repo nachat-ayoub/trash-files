@@ -72,7 +72,7 @@ $(document).ready(function () {
       $("article").after(watchContainer);
 
       watchContainer.html(`
-          <div class='py-3'></div>
+          <div class='py-1'></div>
           <ul class='servers list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1'>
             ${data.s
               .split("|")
