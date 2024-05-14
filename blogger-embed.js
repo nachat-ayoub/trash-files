@@ -73,7 +73,7 @@ $(document).ready(function () {
          }
     
         .btn-purple:hover {
-          opacity: 0.8;
+          opacity: 0.85;
           color:#fff;
         }
         .responsive-fs {
