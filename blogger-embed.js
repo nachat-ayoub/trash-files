@@ -65,7 +65,7 @@ $(document).ready(function () {
                 ${decodeURIComponent(data.title).replace('الحلقة' ,'شاهد الحلقة')}
             </a>`
         );
-    }, 1000);
+    }, 1500);
       // Get the element with ID 'watch-container'
       const watchContainer = $("<div id='watch-container'></div>");
       // Append the watchContainer after the article element
