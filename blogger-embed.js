@@ -60,7 +60,7 @@ $(document).ready(function () {
       
     // After 1 second, replace the SVG content with the title
     setTimeout(function() {
-        $("#go-watch a").html(
+        $("#go-watch").html(
             `<a class='btn btn-purple mx-auto' href='#watch-container'>
                 ${decodeURIComponent(data.title).replace('الحلقة' ,'شاهد الحلقة')}
             </a>`
