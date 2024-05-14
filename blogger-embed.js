@@ -53,6 +53,20 @@ $(document).ready(function () {
 
     if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
 
+      $('head').append(`
+      <style>
+        .responsive-fs {
+            /* Default font size for all devices */
+            font-size: 1rem !important;
+          }
+          
+          @media (max-width: 768px) {  /* Target screens smaller than 768px (common mobile breakpoint) */
+            .responsive-fs {
+              font-size: 0.85rem !important;  /* Adjust font size for mobile */
+            }
+          }
+      </style>
+      `)
       
       $("#go-watch").html(
         `<a class='btn btn-purple mx-auto' style='opacity:.7;' href='#'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" style="scale:1.6;"><circle cx="18" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="12" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".33" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="6" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin="0" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg></a>`
@@ -73,7 +87,7 @@ $(document).ready(function () {
 
       watchContainer.html(`
           <div class='pt-2'>
-            <div class='btn btn-purple mx-auto mb-1 d-table'>${decodeURIComponent(data.title) }</div>
+            <div class='btn btn-purple mx-auto mb-1 d-table responsive-fs'>${decodeURIComponent(data.title) }</div>
           </div>
           <ul class='servers list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1'>
             ${data.s
@@ -95,15 +109,15 @@ $(document).ready(function () {
             data.s.split("|")[0].split("_")[1]
           }' allowfullscreen></iframe>
           
-          <div class='d-flex align-items-center justify-content-between mt-1 mb-3'>
+          <div class='d-flex align-items-center justify-content-between mt-1 mb-3 responsive-fs'>
             <a class='btn btn-sm btn-purple pe-3' href='${data.p}'>
               <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
               الحلقة السابقة
           </a>
 
-            <a class='btn mx-1 btn-primary' href='${data.b}'>العودة</a>
+            <a class='btn btn-sm mx-1 btn-primary' href='${data.b}'>العودة</a>
 
-            <a class='btn btn-sm btn-purple ps-3' href='${
+            <a class='btn btn-sm btn-purple ps-3 responsive-fs' href='${
               data.n
             }'>الحلقة التالية
               <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
