@@ -30,7 +30,7 @@ function decodeJSON(obfuscatedString) {
     const val = mapping[key];
     decoded = decoded.replaceAll(val, key);
   }
-  const jsonObject = JSON.parse(decoded);
+  const jsonObject = JSON.parse(decodeURIComponent(decoded));
 
   return jsonObject;
 }
@@ -60,8 +60,7 @@ $(document).ready(function () {
 
   // Check if the current URL matches the pattern
   if (urlPattern.test(currentURL) && videoParam) {
-    const data = decodeJSON(decodeURIComponent(videoParam));
-    console.log(data)
+    let data = decodeJSON(decodeURIComponent(videoParam));
     
     if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
 
