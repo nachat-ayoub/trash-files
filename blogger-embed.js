@@ -58,6 +58,24 @@ $(document).ready(function () {
      
       // Add the CSS rule to the style element
       mobileStyles.textContent = `
+        .btn-purple {
+          background-color: #8614f8;
+          background-image: linear-gradient(#8614f8 0, #760be0 100%);
+          border-radius: 5px;
+          border-style: none;
+          box-shadow: rgba(245, 244, 247, 0.25) 0 1px 1px inset;
+          color: #fff;
+          display: inline-block;
+          text-align: center;
+          transition: all 0.3s cubic-bezier(0.05, 0.03, 0.35, 1);
+          touch-action: manipulation;
+          vertical-align: bottom;
+         }
+    
+        .btn-purple:hover {
+          opacity: 0.8;
+          color:#fff;
+        }
         .responsive-fs {
             /* Default font size for all devices */
             font-size: 1rem !important;
@@ -65,7 +83,7 @@ $(document).ready(function () {
           
           @media (max-width: 768px) {  /* Target screens smaller than 768px (common mobile breakpoint) */
             .responsive-fs {
-              font-size: 0.85rem !important;  /* Adjust font size for mobile */
+              font-size: 0.8rem !important;  /* Adjust font size for mobile */
             }
           }`;
       $('head').append(mobileStyles)
