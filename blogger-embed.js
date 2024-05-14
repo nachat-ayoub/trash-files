@@ -72,7 +72,7 @@ $(document).ready(function () {
       $("article").after(watchContainer);
 
       watchContainer.html(`
-          <div class='py-1'>
+          <div class='pt-2'>
             <div class='btn btn-purple mx-auto mb-1 d-table'>${decodeURIComponent(data.title) }</div>
           </div>
           <ul class='servers list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1'>
