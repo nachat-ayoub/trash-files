@@ -72,7 +72,9 @@ $(document).ready(function () {
       $("article").after(watchContainer);
 
       watchContainer.html(`
-          <div class='py-1'></div>
+          <div class='py-1'>
+            <div class='btn btn-purple mx-auto mb-1 d-table'>${decodeURIComponent(data.title) }</div>
+          </div>
           <ul class='servers list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1'>
             ${data.s
               .split("|")
@@ -106,9 +108,7 @@ $(document).ready(function () {
             }'>الحلقة التالية
               <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
             </a>
-          </div>
-          
-          <div class='btn btn-purple mx-auto mt-1 d-table'>${decodeURIComponent(data.title) }</div>`);
+          </div>`);
     }
   }
 });
