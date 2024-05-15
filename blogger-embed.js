@@ -105,7 +105,7 @@ $(document).ready(function () {
     // After 1 second, replace the SVG content with the title
     setTimeout(function() {
         
-      if(checkDateDiff(data.d, 10/60)) {
+      if(checkDateDiff(data.d, 40)) {
         window.location.href = data.b
       } else {
         $("#go-watch").html(
