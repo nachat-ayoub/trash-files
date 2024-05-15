@@ -1,4 +1,4 @@
-function checkDateDiff(dateParamStr, minutes) {
+function checkDateDiff(dateParamStr, minutes=10) {
   const dateParam = new Date(dateParamStr);
   
   // Convert minutes to milliseconds
@@ -62,7 +62,7 @@ $(document).ready(function () {
   if (urlPattern.test(currentURL) && videoParam) {
     let data = decodeJSON(decodeURIComponent(videoParam));
     
-    if (data && data?.s && data?.p && data?.b && data?.n && data?.title) {
+    if (data && data?.s && data?.p && data?.b && data?.n && data?.title && data?.d) {
 
       // Create a style element
       var mobileStyles = document.createElement('style');
@@ -102,14 +102,18 @@ $(document).ready(function () {
       $("#go-watch").html(
         `<a class='btn btn-purple' style='opacity:.6;' href='#'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" style="scale:1.6;"><circle cx="18" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="12" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".33" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="6" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin="0" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg></a>`
       );
-      
     // After 1 second, replace the SVG content with the title
     setTimeout(function() {
+        
+      if(checkDateDiff(data.d, 10/60)) {
+        window.location.href = data.b
+      } else {
         $("#go-watch").html(
             `<a class='btn btn-purple responsive-fs' href='#watch-container'>
                 ${decodeURIComponent(data.title).replace('الحلقة' ,'شاهد الحلقة')}
             </a>`
         );
+      }
     }, 1500);
       // Get the element with ID 'watch-container'
       const watchContainer = $("<div id='watch-container'></div>");
