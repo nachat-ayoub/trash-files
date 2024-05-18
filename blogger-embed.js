@@ -51,7 +51,7 @@ $(document).ready(function () {
   // Check if the current URL matches the pattern
   if (urlPattern.test(currentURL) && videoParam) {
     let data = decodeJSON(decodeURIComponent(videoParam));
-    
+    console.log({data})
     if (data && data?.title && data?.eps) {
 
       // Create a style element
