@@ -1,59 +1,63 @@
-function decodeJSON(obfuscatedString) {
-  // 1. Base64 decode and parse JSON
-  let decoded = atob(obfuscatedString);
-
-  // 2. remap original characters
-  const mapping = {
-    '","': "~",
-    "','": "~",
-    '":"': "@",
-    "':'": "@",
-    '{"': "$",
-    "{'": "$",
-    '"}': "!",
-    "'}": "!",
-  };
-
-  for (const key in mapping) {
-    const val = mapping[key];
-    decoded = decoded.replaceAll(val, key);
-  }
-  const jsonObject = JSON.parse(decodeURIComponent(decoded));
-
-  return jsonObject;
-}
-
-// Function to parse URL query parameters
-function getQueryParam(name) {
-  const url = window.location.search;
-  const regex = /v=([^&=?]*)/;
-  const match = url.match(regex);
-
-  return match ? match[1] : null;
-}
-
-// Function to change the iframe src
-function changeIframeSrc(src) {
-  $('#watch').attr('src', src);
-}
-
 // After page load
 $(document).ready(function () {
-  // Check if the 'v' query parameter exists
-  const videoParam = getQueryParam("v");
+ 
+    let data = {
+  title: "Koi wa Ameagari no You ni",
+  eps: [
+    {
+      name: "الحلقة 12",
+      embed: "https://www.mp4upload.com/embed-emq55af82zca.html"
+    },
+    {
+      name: "الحلقة 11",
+      embed: "https://www.mp4upload.com/embed-wrnrf03ik8av.html"
+    },
+    {
+      name: "الحلقة 10",
+      embed: "https://www.mp4upload.com/embed-j861fbak01vk.html"
+    },
+    {
+      name: "الحلقة 9",
+      embed: "https://www.mp4upload.com/embed-bbq9zbfbujhr.html"
+    },
+    {
+      name: "الحلقة 8",
+      embed: "https://www.mp4upload.com/embed-smswpg6l7e2i.html"
+    },
+    {
+      name: "الحلقة 7",
+      embed: "https://drive.google.com/file/d/1eh2yLsrV51_aMhEEDFfWbbYWCY60gfod/preview"
+    },
+    {
+      name: "الحلقة 6",
+      embed: "https://drive.google.com/file/d/1MD7c2lLt_8GxO_fN2I0-xs8bFvaSBVkA/preview"
+    },
+    {
+      name: "الحلقة 5",
+      embed: "https://www.mp4upload.com/embed-0qezqxpu13ap.html"
+    },
+    {
+      name: "الحلقة 4",
+      embed: "https://drive.google.com/file/d/145v1KhiZwzFAkcnDxWhUPPm6QA7u4uzO/preview"
+    },
+    {
+      name: "الحلقة 3",
+      embed: "https://www.mp4upload.com/embed-gva7bbefr7q6.html"
+    },
+    {
+      name: "الحلقة 2",
+      embed: "https://www.mp4upload.com/embed-sc4gkfc0dfj0.html"
+    },
+    {
+      name: "الحلقة 1",
+      embed: "https://www.mp4upload.com/embed-79hjdxnwkfo4.html"
+    }
+  ]
+};
 
-  // Define the regular expression pattern to match the URL structure
-  const urlPattern = /\/\d{4}\/\d{2}\/[^\/]+\.html\?v=.+/;
 
-  // Get the current URL
-  const currentURL = window.location.href;
-
-  // Check if the current URL matches the pattern
-  if (urlPattern.test(currentURL) && videoParam) {
-    let data = decodeJSON(decodeURIComponent(videoParam));
-    console.log({data})
-    if (data && data?.title && data?.eps) {
-
+  
+   
       // Create a style element
       var mobileStyles = document.createElement('style');
      
@@ -87,82 +91,122 @@ $(document).ready(function () {
               font-size: 0.85rem !important;  /* Adjust font size for mobile */
             }
           }`;
-      $('head').append(mobileStyles);
+      $('head').append(mobileStyles)
       
       $("#go-watch").html(
-        `<a class='btn btn-purple responsive-fs' href='#watch-container'>
-            ${decodeURIComponent(data.title).replace('الحلقة', 'شاهد الحلقة')}
-        </a>`
+        `<a class='btn btn-purple' style='opacity:.6;' href='#'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" style="scale:1.6;"><circle cx="18" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="12" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".33" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="6" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin="0" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg></a>`
       );
-
+    // After 1 second, replace the SVG content with the title
+    setTimeout(function() {
+        
+      if(checkDateDiff(data.d,20)) {
+        window.location.href = data.b
+      } else {
+        $("#go-watch").html(
+            `<a class='btn btn-purple responsive-fs' href='#watch-container'>
+                 شاهد ${data.title} 
+            </a>`
+        );
+      }
+    }, 1500);
       // Get the element with ID 'watch-container'
       const watchContainer = $("<div id='watch-container'></div>");
       // Append the watchContainer after the article element
       $("article").after(watchContainer);
 
-      let episodesHtml = data.eps.map((ep, index) => 
-        `<li>
-          <button onclick="(() => { 
-            changeIframeSrc('${ep.embed}');
-            $('.btn-secondary').toggleClass('btn-secondary btn-outline-secondary');
-            $(this).toggleClass('btn-outline-secondary btn-secondary');
-          })()"
-          class="btn btn-sm btn-${index === 0 ? '' : 'outline-'}secondary m-1 text-capitalize">
-            ${ep.name}
-          </button>
-        </li>`
-      ).join("");
-
       watchContainer.html(`
-        <div class='pt-2'>
-          <div class='btn btn-purple mx-auto mb-1 d-table responsive-fs'>${decodeURIComponent(data.title)}</div>
-        </div>
-        <ul class='servers list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1'>
-          ${episodesHtml}
-        </ul>
+          <!-- Container for Episode Viewer -->
+<div id="episode-viewer" class='container'>
+  <!-- Episodes List -->
+  <ul id="episode-list" class="list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1"></ul>
+  <!-- Watch Container -->
+  <div id="watch-container">
+    <!-- Title -->
+    <div class="pt-2">
+      <div id="episode-title" class="btn btn-purple mx-auto mb-1 d-table responsive-fs"></div>
+    </div>
+    <!-- Episode Iframe -->
+    <iframe id="watch" class="w-100" style="aspect-ratio:16/9; background-color: rgba(57, 62, 71,0.35);" allowfullscreen></iframe>
+    <!-- Navigation Buttons -->
+    <div class="d-flex align-items-center justify-content-between mt-1 mb-3 responsive-fs">
+      <button id="prev-episode" class="btn btn-sm btn-purple pe-3">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M15 6l-6 6l6 6" />
+        </svg>
+        الحلقة التالية
+      </button> 
+      <button id="next-episode" class="btn btn-sm btn-purple ps-3">
+        الحلقة السابقة
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M9 6l6 6l-6 6" />
+        </svg>
 
-        <iframe id='watch' class='w-100' style='aspect-ratio:16/9; background-color: rgba(57, 62, 71,0.35);' src='${data.eps[0].embed}' allowfullscreen></iframe>
-        
-        <div class='d-flex align-items-center justify-content-between mt-1 mb-3 responsive-fs'>
-          <button class='btn btn-sm btn-purple pe-3' id='prev-episode'>
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M15 6l-6 6l6 6" />
-            </svg>
-            الحلقة السابقة
-          </button>
+      </button>
+    </div>
+  </div>
+</div>`);
 
-          <button class='btn btn-sm mx-1 btn-primary' id='back-button'>العودة</button>
 
-          <button class='btn btn-sm btn-purple ps-3 responsive-fs' id='next-episode'>
-            الحلقة التالية
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-              <path d="M9 6l6 6l-6 6" />
-            </svg>
-          </button>
-        </div>`);
 
-      let currentEpisodeIndex = 0;
 
-      function updateEpisode(index) {
-        if (index >= 0 && index < data.eps.length) {
-          changeIframeSrc(data.eps[index].embed);
-          currentEpisodeIndex = index;
-        }
-      }
 
-      $('#prev-episode').on('click', function() {
-        updateEpisode(currentEpisodeIndex - 1);
+
+  
+const episodes = data.eps;
+
+// Function to change the iframe src
+function changeIframeSrc(src) {
+  $("#watch").attr("src", src);
+}
+
+$("#episode-title").text(anime.title);
+changeIframeSrc(episodes[0].embed);
+
+// Function to populate episodes
+function populateEpisodes() {
+  const episodeList = $("#episode-list");
+
+  episodes.forEach((episode, index) => {
+    const button = $("<button>")
+      .addClass(
+        "btn btn-sm m-1 text-capitalize " +
+          (index == episodes.length - 1
+            ? "btn-secondary"
+            : "btn-outline-secondary")
+      )
+      .text(episode.name)
+      .on("click", function () {
+        changeIframeSrc(episode.embed);
+        $(".btn-secondary").toggleClass("btn-secondary btn-outline-secondary");
+        $(this).toggleClass("btn-outline-secondary btn-secondary");
       });
+    episodeList.append($("<li>").append(button));
+  });
+}
 
-      $('#next-episode').on('click', function() {
-        updateEpisode(currentEpisodeIndex + 1);
-      });
+// Initialize
+populateEpisodes();
 
-      $('#back-button').on('click', function() {
-        window.history.back();
-      });
-    }
+// Previous Episode Button
+$("#prev-episode").on("click", function () {
+  const buttons = $("#episode-list button");
+  const selectedButton = buttons.filter(".btn-secondary");
+  const prevButton = selectedButton.parent().prev().find("button");
+  if (prevButton.length) {
+    prevButton.trigger("click");
   }
 });
+
+// Next Episode Button
+$("#next-episode").on("click", function () {
+  const buttons = $("#episode-list button");
+  const selectedButton = buttons.filter(".btn-secondary");
+  const nextButton = selectedButton.parent().next().find("button");
+  if (nextButton.length) {
+    nextButton.trigger("click");
+  }
+});
+
+    })
