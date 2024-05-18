@@ -149,7 +149,7 @@ $(document).ready(function () {
     $("#watch").attr("src", src);
   }
 
-  $("#episode-title").text(date.title);
+  $("#episode-title").text(data.title);
   changeIframeSrc(episodes[0].embed);
 
   // Function to populate episodes
