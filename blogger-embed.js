@@ -1,68 +1,67 @@
 // After page load
 $(document).ready(function () {
- 
-    let data = {
-  title: "Koi wa Ameagari no You ni",
-  eps: [
-    {
-      name: "الحلقة 12",
-      embed: "https://www.mp4upload.com/embed-emq55af82zca.html"
-    },
-    {
-      name: "الحلقة 11",
-      embed: "https://www.mp4upload.com/embed-wrnrf03ik8av.html"
-    },
-    {
-      name: "الحلقة 10",
-      embed: "https://www.mp4upload.com/embed-j861fbak01vk.html"
-    },
-    {
-      name: "الحلقة 9",
-      embed: "https://www.mp4upload.com/embed-bbq9zbfbujhr.html"
-    },
-    {
-      name: "الحلقة 8",
-      embed: "https://www.mp4upload.com/embed-smswpg6l7e2i.html"
-    },
-    {
-      name: "الحلقة 7",
-      embed: "https://drive.google.com/file/d/1eh2yLsrV51_aMhEEDFfWbbYWCY60gfod/preview"
-    },
-    {
-      name: "الحلقة 6",
-      embed: "https://drive.google.com/file/d/1MD7c2lLt_8GxO_fN2I0-xs8bFvaSBVkA/preview"
-    },
-    {
-      name: "الحلقة 5",
-      embed: "https://www.mp4upload.com/embed-0qezqxpu13ap.html"
-    },
-    {
-      name: "الحلقة 4",
-      embed: "https://drive.google.com/file/d/145v1KhiZwzFAkcnDxWhUPPm6QA7u4uzO/preview"
-    },
-    {
-      name: "الحلقة 3",
-      embed: "https://www.mp4upload.com/embed-gva7bbefr7q6.html"
-    },
-    {
-      name: "الحلقة 2",
-      embed: "https://www.mp4upload.com/embed-sc4gkfc0dfj0.html"
-    },
-    {
-      name: "الحلقة 1",
-      embed: "https://www.mp4upload.com/embed-79hjdxnwkfo4.html"
-    }
-  ]
-};
+  let data = {
+    title: "Koi wa Ameagari no You ni",
+    eps: [
+      {
+        name: "الحلقة 12",
+        embed: "https://www.mp4upload.com/embed-emq55af82zca.html"
+      },
+      {
+        name: "الحلقة 11",
+        embed: "https://www.mp4upload.com/embed-wrnrf03ik8av.html"
+      },
+      {
+        name: "الحلقة 10",
+        embed: "https://www.mp4upload.com/embed-j861fbak01vk.html"
+      },
+      {
+        name: "الحلقة 9",
+        embed: "https://www.mp4upload.com/embed-bbq9zbfbujhr.html"
+      },
+      {
+        name: "الحلقة 8",
+        embed: "https://www.mp4upload.com/embed-smswpg6l7e2i.html"
+      },
+      {
+        name: "الحلقة 7",
+        embed:
+          "https://drive.google.com/file/d/1eh2yLsrV51_aMhEEDFfWbbYWCY60gfod/preview"
+      },
+      {
+        name: "الحلقة 6",
+        embed:
+          "https://drive.google.com/file/d/1MD7c2lLt_8GxO_fN2I0-xs8bFvaSBVkA/preview"
+      },
+      {
+        name: "الحلقة 5",
+        embed: "https://www.mp4upload.com/embed-0qezqxpu13ap.html"
+      },
+      {
+        name: "الحلقة 4",
+        embed:
+          "https://drive.google.com/file/d/145v1KhiZwzFAkcnDxWhUPPm6QA7u4uzO/preview"
+      },
+      {
+        name: "الحلقة 3",
+        embed: "https://www.mp4upload.com/embed-gva7bbefr7q6.html"
+      },
+      {
+        name: "الحلقة 2",
+        embed: "https://www.mp4upload.com/embed-sc4gkfc0dfj0.html"
+      },
+      {
+        name: "الحلقة 1",
+        embed: "https://www.mp4upload.com/embed-79hjdxnwkfo4.html"
+      }
+    ]
+  };
 
+  // Create a style element
+  var mobileStyles = document.createElement("style");
 
-  
-   
-      // Create a style element
-      var mobileStyles = document.createElement('style');
-     
-      // Add the CSS rule to the style element
-      mobileStyles.textContent = `
+  // Add the CSS rule to the style element
+  mobileStyles.textContent = `
         .btn-purple {
           background-color: #8614f8;
           background-image: linear-gradient(#8614f8 0, #760be0 100%);
@@ -91,30 +90,25 @@ $(document).ready(function () {
               font-size: 0.85rem !important;  /* Adjust font size for mobile */
             }
           }`;
-      $('head').append(mobileStyles)
-      
-      $("#go-watch").html(
-        `<a class='btn btn-purple' style='opacity:.6;' href='#'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" style="scale:1.6;"><circle cx="18" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="12" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".33" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="6" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin="0" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg></a>`
-      );
-    // After 1 second, replace the SVG content with the title
-    setTimeout(function() {
-        
-      if(checkDateDiff(data.d,20)) {
-        window.location.href = data.b
-      } else {
-        $("#go-watch").html(
-            `<a class='btn btn-purple responsive-fs' href='#watch-container'>
-                 شاهد ${data.title} 
-            </a>`
-        );
-      }
-    }, 1500);
-      // Get the element with ID 'watch-container'
-      const watchContainer = $("<div id='watch-container'></div>");
-      // Append the watchContainer after the article element
-      $("article").after(watchContainer);
+  $("head").append(mobileStyles);
 
-      watchContainer.html(`
+  $("#go-watch").html(
+    `<a class='btn btn-purple' style='opacity:.6;' href='#'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" style="scale:1.6;"><circle cx="18" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="12" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".33" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="6" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin="0" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg></a>`
+  );
+  // After 1 second, replace the SVG content with the title
+  setTimeout(function () {
+    $("#go-watch").html(
+      `<a class='btn btn-purple responsive-fs' href='#watch-container'>
+               شاهد ${data.title} 
+       </a>`
+    );
+  }, 1500);
+  // Get the element with ID 'watch-container'
+  const watchContainer = $("<div id='watch-container'></div>");
+  // Append the watchContainer after the article element
+  $("article").after(watchContainer);
+
+  watchContainer.html(`
           <!-- Container for Episode Viewer -->
 <div id="episode-viewer" class='container'>
   <!-- Episodes List -->
@@ -148,65 +142,60 @@ $(document).ready(function () {
   </div>
 </div>`);
 
+  const episodes = data.eps;
 
+  // Function to change the iframe src
+  function changeIframeSrc(src) {
+    $("#watch").attr("src", src);
+  }
 
+  $("#episode-title").text(anime.title);
+  changeIframeSrc(episodes[0].embed);
 
+  // Function to populate episodes
+  function populateEpisodes() {
+    const episodeList = $("#episode-list");
 
+    episodes.forEach((episode, index) => {
+      const button = $("<button>")
+        .addClass(
+          "btn btn-sm m-1 text-capitalize " +
+            (index == episodes.length - 1
+              ? "btn-secondary"
+              : "btn-outline-secondary")
+        )
+        .text(episode.name)
+        .on("click", function () {
+          changeIframeSrc(episode.embed);
+          $(".btn-secondary").toggleClass(
+            "btn-secondary btn-outline-secondary"
+          );
+          $(this).toggleClass("btn-outline-secondary btn-secondary");
+        });
+      episodeList.append($("<li>").append(button));
+    });
+  }
 
-  
-const episodes = data.eps;
+  // Initialize
+  populateEpisodes();
 
-// Function to change the iframe src
-function changeIframeSrc(src) {
-  $("#watch").attr("src", src);
-}
-
-$("#episode-title").text(anime.title);
-changeIframeSrc(episodes[0].embed);
-
-// Function to populate episodes
-function populateEpisodes() {
-  const episodeList = $("#episode-list");
-
-  episodes.forEach((episode, index) => {
-    const button = $("<button>")
-      .addClass(
-        "btn btn-sm m-1 text-capitalize " +
-          (index == episodes.length - 1
-            ? "btn-secondary"
-            : "btn-outline-secondary")
-      )
-      .text(episode.name)
-      .on("click", function () {
-        changeIframeSrc(episode.embed);
-        $(".btn-secondary").toggleClass("btn-secondary btn-outline-secondary");
-        $(this).toggleClass("btn-outline-secondary btn-secondary");
-      });
-    episodeList.append($("<li>").append(button));
+  // Previous Episode Button
+  $("#prev-episode").on("click", function () {
+    const buttons = $("#episode-list button");
+    const selectedButton = buttons.filter(".btn-secondary");
+    const prevButton = selectedButton.parent().prev().find("button");
+    if (prevButton.length) {
+      prevButton.trigger("click");
+    }
   });
-}
 
-// Initialize
-populateEpisodes();
-
-// Previous Episode Button
-$("#prev-episode").on("click", function () {
-  const buttons = $("#episode-list button");
-  const selectedButton = buttons.filter(".btn-secondary");
-  const prevButton = selectedButton.parent().prev().find("button");
-  if (prevButton.length) {
-    prevButton.trigger("click");
-  }
+  // Next Episode Button
+  $("#next-episode").on("click", function () {
+    const buttons = $("#episode-list button");
+    const selectedButton = buttons.filter(".btn-secondary");
+    const nextButton = selectedButton.parent().next().find("button");
+    if (nextButton.length) {
+      nextButton.trigger("click");
+    }
+  });
 });
-
-// Next Episode Button
-$("#next-episode").on("click", function () {
-  const buttons = $("#episode-list button");
-  const selectedButton = buttons.filter(".btn-secondary");
-  const nextButton = selectedButton.parent().next().find("button");
-  if (nextButton.length) {
-    nextButton.trigger("click");
-  }
-});
-
-    })
