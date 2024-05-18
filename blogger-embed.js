@@ -11,7 +11,7 @@ function getQueryParam(name) {
 
 // After page load
 $(document).ready(function () {
-  if(getQueryParam('v')) return;
+  if(!getQueryParam('v')) return;
   
   let data = {
     title: "Koi wa Ameagari no You ni",
