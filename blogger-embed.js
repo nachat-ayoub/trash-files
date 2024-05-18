@@ -1,5 +1,18 @@
+// Function to parse URL query parameters
+function getQueryParam(name) {
+  const url = window.location.search;
+  const regex = /v=([^&=?]*)/;
+  const match = url.match(regex);
+
+  return match ? match[1] : null;
+}
+
+
+
 // After page load
 $(document).ready(function () {
+  if(getQueryParam('v')) return;
+  
   let data = {
     title: "Koi wa Ameagari no You ni",
     eps: [
