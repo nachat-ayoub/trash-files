@@ -1,15 +1,3 @@
-function checkDateDiff(dateParamStr, minutes=10) {
-  const dateParam = new Date(dateParamStr);
-  
-  // Convert minutes to milliseconds
-  const millisecondsDiff = minutes * 60 * 1000;
-
-  // Calculate the difference between the current date and the dateParam
-  const timeDifference = new Date() - dateParam;
-  // Check if the time difference is greater than the specified minutes
-  return timeDifference > millisecondsDiff;
-}
-
 function decodeJSON(obfuscatedString) {
   // 1. Base64 decode and parse JSON
   let decoded = atob(obfuscatedString);
@@ -44,8 +32,10 @@ function getQueryParam(name) {
   return match ? match[1] : null;
 }
 
-
-
+// Function to change the iframe src
+function changeIframeSrc(src) {
+  $('#watch').attr('src', src);
+}
 
 // After page load
 $(document).ready(function () {
@@ -62,7 +52,7 @@ $(document).ready(function () {
   if (urlPattern.test(currentURL) && videoParam) {
     let data = decodeJSON(decodeURIComponent(videoParam));
     
-    if (data && data?.s && data?.p && data?.b && data?.n && data?.title && data?.d) {
+    if (data && data?.title && data?.eps) {
 
       // Create a style element
       var mobileStyles = document.createElement('style');
@@ -97,67 +87,82 @@ $(document).ready(function () {
               font-size: 0.85rem !important;  /* Adjust font size for mobile */
             }
           }`;
-      $('head').append(mobileStyles)
+      $('head').append(mobileStyles);
       
       $("#go-watch").html(
-        `<a class='btn btn-purple' style='opacity:.6;' href='#'><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30px" style="scale:1.6;"><circle cx="18" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".67" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="12" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin=".33" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle><circle cx="6" cy="12" r="0" fill="currentColor"><animate attributeName="r" begin="0" calcMode="spline" dur="1.5s" keySplines="0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8;0.2 0.2 0.4 0.8" repeatCount="indefinite" values="0;2;0;0"></animate></circle></svg></a>`
+        `<a class='btn btn-purple responsive-fs' href='#watch-container'>
+            ${decodeURIComponent(data.title).replace('الحلقة', 'شاهد الحلقة')}
+        </a>`
       );
-    // After 1 second, replace the SVG content with the title
-    setTimeout(function() {
-        
-      if(checkDateDiff(data.d,20)) {
-        window.location.href = data.b
-      } else {
-        $("#go-watch").html(
-            `<a class='btn btn-purple responsive-fs' href='#watch-container'>
-                ${decodeURIComponent(data.title).replace('الحلقة' ,'شاهد الحلقة')}
-            </a>`
-        );
-      }
-    }, 1500);
+
       // Get the element with ID 'watch-container'
       const watchContainer = $("<div id='watch-container'></div>");
       // Append the watchContainer after the article element
       $("article").after(watchContainer);
 
+      let episodesHtml = data.eps.map((ep, index) => 
+        `<li>
+          <button onclick="(() => { 
+            changeIframeSrc('${ep.embed}');
+            $('.btn-secondary').toggleClass('btn-secondary btn-outline-secondary');
+            $(this).toggleClass('btn-outline-secondary btn-secondary');
+          })()"
+          class="btn btn-sm btn-${index === 0 ? '' : 'outline-'}secondary m-1 text-capitalize">
+            ${ep.name}
+          </button>
+        </li>`
+      ).join("");
+
       watchContainer.html(`
-          <div class='pt-2'>
-            <div class='btn btn-purple mx-auto mb-1 d-table responsive-fs'>${decodeURIComponent(data.title) }</div>
-          </div>
-          <ul class='servers list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1'>
-            ${data.s
-              .split("|")
-              .map((s) => s.replace("-", " ").split("_"))
-              .map(
-                (s, index) =>
-                  `<li><button onclick="(() => { $('#watch').attr('src', '${
-                    s[1]
-                  }'); $('.btn-secondary').toggleClass('btn-secondary btn-outline-secondary'); $(this).toggleClass('btn-outline-secondary btn-secondary') })()"
-               class="btn btn-sm btn-${
-                 index === 0 ? "" : "outline-"
-               }secondary m-1 text-capitalize">${s[0]}</button></li>`
-              )
-              .join("")}
-          </ul>
+        <div class='pt-2'>
+          <div class='btn btn-purple mx-auto mb-1 d-table responsive-fs'>${decodeURIComponent(data.title)}</div>
+        </div>
+        <ul class='servers list-unstyled d-flex flex-wrap justify-content-center align-items-center mt-2 mb-1'>
+          ${episodesHtml}
+        </ul>
 
-          <iframe id='watch' class='w-100' style='aspect-ratio:16/9; background-color: rgba(57, 62, 71,0.35);' src='${
-            data.s.split("|")[0].split("_")[1]
-          }' allowfullscreen></iframe>
-          
-          <div class='d-flex align-items-center justify-content-between mt-1 mb-3 responsive-fs'>
-            <a class='btn btn-sm btn-purple pe-3' href='${data.p}'>
-              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 6l-6 6l6 6" /></svg>
-              الحلقة السابقة
-          </a>
+        <iframe id='watch' class='w-100' style='aspect-ratio:16/9; background-color: rgba(57, 62, 71,0.35);' src='${data.eps[0].embed}' allowfullscreen></iframe>
+        
+        <div class='d-flex align-items-center justify-content-between mt-1 mb-3 responsive-fs'>
+          <button class='btn btn-sm btn-purple pe-3' id='prev-episode'>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-left">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M15 6l-6 6l6 6" />
+            </svg>
+            الحلقة السابقة
+          </button>
 
-            <a class='btn btn-sm mx-1 btn-primary' href='${data.b}'>العودة</a>
+          <button class='btn btn-sm mx-1 btn-primary' id='back-button'>العودة</button>
 
-            <a class='btn btn-sm btn-purple ps-3 responsive-fs' href='${
-              data.n
-            }'>الحلقة التالية
-              <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>
-            </a>
-          </div>`);
+          <button class='btn btn-sm btn-purple ps-3 responsive-fs' id='next-episode'>
+            الحلقة التالية
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-right">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+              <path d="M9 6l6 6l-6 6" />
+            </svg>
+          </button>
+        </div>`);
+
+      let currentEpisodeIndex = 0;
+
+      function updateEpisode(index) {
+        if (index >= 0 && index < data.eps.length) {
+          changeIframeSrc(data.eps[index].embed);
+          currentEpisodeIndex = index;
+        }
+      }
+
+      $('#prev-episode').on('click', function() {
+        updateEpisode(currentEpisodeIndex - 1);
+      });
+
+      $('#next-episode').on('click', function() {
+        updateEpisode(currentEpisodeIndex + 1);
+      });
+
+      $('#back-button').on('click', function() {
+        window.history.back();
+      });
     }
   }
 });
