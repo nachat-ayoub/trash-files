@@ -99,7 +99,7 @@ $(document).ready(function () {
   setTimeout(function () {
     $("#go-watch").html(
       `<a class='btn btn-purple responsive-fs' href='#watch-container'>
-               شاهد ${data.title} 
+                ${data.title}  شاهد
        </a>`
     );
   }, 1500);
