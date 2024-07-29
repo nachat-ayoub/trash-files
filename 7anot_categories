@@ -1,0 +1,73 @@
+{
+  "categories": [
+    {
+      "name": "منتجات الألبان",
+      "products": [
+        {
+          "name": "حليب",
+          "image": "https://i.imgur.com/D6nwlDn.png",
+          "price": 1.5,
+          "description": "كرتون من الحليب الطازج."
+        },
+        {
+          "name": "جبن",
+          "image": "https://i.imgur.com/iy6Qd1u.png",
+          "price": 68.0,
+          "description": "كتلة من الجبن الشيدر."
+        },
+        {
+          "name": "دانون",
+          "image": "https://i.imgur.com/s6lAfD6.png",
+          "price": 2.5,
+          "description": "أسيل زبادي الموز دانون 110 جم."
+        }
+      ]
+    },
+    {
+      "name": "بسكويت",
+      "products": [
+        {
+          "name": "بسكويت برقائق الشوكولاتة",
+          "image": "https://i.imgur.com/7bK1sVJ.png",
+          "price": 2,
+          "description": "عبوة من بسكويت برقائق الشوكولاتة."
+        },
+        {
+          "name": "بسكويت الشوفان",
+          "image": "https://i.imgur.com/4APmNuA.png",
+          "price": 2.0,
+          "description": "عبوة من بسكويت الشوفان."
+        },
+	{
+          "name": "بسكويت مومو",
+          "image": "https://i.imgur.com/jhhpSZp.png",
+          "price": 1.0,
+          "description": "بسكويت مومو تاكلو تصلاع."
+        }
+      ]
+    },
+    {
+      "name": "رقائق",
+      "products": [
+        {
+          "name": "رقائق البطاطس",
+          "image": "https://i.imgur.com/mjEUcH1.png",
+          "price": 1.0,
+          "description": "كيس من رقائق البطاطس."
+        },
+        {
+          "name": "رقائق التورتيلا",
+          "image": "https://i.imgur.com/DxRGuLh.png",
+          "price": 5.0,
+          "description": "كيس من رقائق التورتيلا."
+        }
+	{
+	  "name": "رقائق دوريتوس بالجبنة",
+	  "image": "https://i.imgur.com/JJrqP2Q.png"
+	  "price": 23.0,
+	  "description": "رقائق دوريتوس بالجبنة 100 جرام",
+	}
+      ]
+    }
+  ]
+}
