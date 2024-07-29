@@ -1,0 +1,73 @@
+{
+  "categories": [
+    {
+      "name": "Produits laitiers",
+      "products": [
+        {
+          "name": "Lait",
+          "image": "https://i.imgur.com/D6nwlDn.png",
+          "price": 1.5,
+          "description": "Un carton de lait frais."
+        },
+        {
+          "name": "Fromage",
+          "image": "https://i.imgur.com/iy6Qd1u.png",
+          "price": 68.0,
+          "description": "Un bloc de fromage cheddar."
+        },
+        {
+          "name": "Danone",
+          "image": "https://i.imgur.com/s6lAfD6.png",
+          "price": 2.5,
+          "description": "Yaourt à la banane Danone 110g."
+        }
+      ]
+    },
+    {
+      "name": "Biscuits",
+      "products": [
+        {
+          "name": "Biscuits aux pépites de chocolat",
+          "image": "https://i.imgur.com/7bK1sVJ.png",
+          "price": 2.0,
+          "description": "Un paquet de biscuits aux pépites de chocolat."
+        },
+        {
+          "name": "Biscuits à l'avoine",
+          "image": "https://i.imgur.com/4APmNuA.png",
+          "price": 2.0,
+          "description": "Un paquet de biscuits à l'avoine."
+        },
+        {
+          "name": "Biscuits Momo",
+          "image": "https://i.imgur.com/jhhpSZp.png",
+          "price": 1.0,
+          "description": "Biscuits Momo à déguster."
+        }
+      ]
+    },
+    {
+      "name": "Chips",
+      "products": [
+        {
+          "name": "Chips de pommes de terre",
+          "image": "https://i.imgur.com/mjEUcH1.png",
+          "price": 1.0,
+          "description": "Un sac de chips de pommes de terre."
+        },
+        {
+          "name": "Chips de tortilla",
+          "image": "https://i.imgur.com/DxRGuLh.png",
+          "price": 5.0,
+          "description": "Un sac de chips de tortilla."
+        },
+        {
+          "name": "Chips Doritos au fromage",
+          "image": "https://i.imgur.com/JJrqP2Q.png",
+          "price": 23.0,
+          "description": "Chips Doritos au fromage 100g."
+        }
+      ]
+    }
+  ]
+}
